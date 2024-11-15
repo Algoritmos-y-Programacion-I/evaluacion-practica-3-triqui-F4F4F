@@ -15,14 +15,12 @@ public class Executable {
     }
 
     public void run(boolean flag) {
-
         flag = false;
 
         while (!flag) {
-
-            System.out.println("\n\nBienvenido al menu:\n");
+            System.out.println("\n\nBienvenido al menú:\n");
             System.out.println("Opciones:\n" + "1. Imprimir tablero \n" + "2. Jugada de la máquina \n"
-                    + "3. Jugada de humano \n" + "4. Verificar ganador \n" + "5. Salir del programa \n");
+                    + "3. Jugada de humano \n" + "4. Verificar ganador \n" + "5. Salir \n");
 
             int option = reader.nextInt();
             reader.nextLine();
@@ -42,15 +40,12 @@ public class Executable {
                     break;
                 case 5:
                     flag = true;
-                    System.exit(0);
+                    System.out.println("Chao con adios");
                     break;
                 default:
-                    System.out.print("Por favor ingrese una opcion valida");
-                    continue;
+                    System.out.print("Ingrese una opción valida\n");
             }
-
         }
-
     }
 
     public static void main(String[] args) {
@@ -64,15 +59,28 @@ public class Executable {
 
     private void jugadaMaquina() {
         cont.jugadaAleatoria();
-        System.out.println("La máquina ha realizado su jugada.");
+        System.out.println("La maquina jugó");
         imprimirTablero();
     }
 
     private void jugadaHumano() {
-        // Implementación de jugada de humano
+        System.out.print("Ingrese la fila (0-2): ");
+        int fila = reader.nextInt();
+        System.out.print("Ingrese la columna (0-2): ");
+        int columna = reader.nextInt();
+        reader.nextLine(); 
+
+        String resultadoJugada = cont.jugadaPersona(fila, columna);
+        System.out.println(resultadoJugada);
+        imprimirTablero();
     }
 
     private void validarGanador() {
-        // Implementación de la validación si alguien ya ganó el triqui
+        String ganador = cont.verificarGanador();
+        if (ganador == null) {
+            System.out.println("No ha terminado el juego");
+        } else {
+            System.out.println(ganador);
+        }
     }
 }
